@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
 const TodoList = () => {
-	const [tasks, setTasks] = useState(["new task"]);
+	const [tasks, setTasks] = useState(["New task"]);
 
 	const inputRef = useRef(null);
 
@@ -12,9 +12,15 @@ const TodoList = () => {
 
 	let makeList = tasks.map((item, i) => {
 		return (
-			<li key={i}>
+			<li
+				className="d-flex justify-content-between hover list-group-item m-2 multi-bg"
+				key={i}>
 				{item}
-				<button onClick={() => removeTask(i)}>X</button>
+				<button
+					className="bg-transparent border-0 text-white"
+					onClick={() => removeTask(i)}>
+					<i className="far fa-trash-alt"></i>
+				</button>
 			</li>
 		);
 	});
@@ -34,8 +40,10 @@ const TodoList = () => {
 	};
 
 	return (
-		<div>
+		<div className="listBody mx-auto mt-4">
+			<h2 className="text-center">What{"'"}s up to task</h2>
 			<input
+				className="border-0 mx-2 mt-1 black-bg text-white w-75"
 				type="text"
 				id="fname"
 				name="fname"
@@ -43,8 +51,10 @@ const TodoList = () => {
 				onKeyDown={newTask}
 				ref={inputRef}
 			/>
-			<ul>{makeList}</ul>
-			<p>{tasks.length} items left</p>
+			<ul className="list-group py-2"> {makeList}</ul>
+			<p className="bg-dark border-round pl-2">
+				{tasks.length} Items left
+			</p>
 		</div>
 	);
 };
